@@ -9,30 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1763788915114938}
+  m_RootGameObject: {fileID: 1340187211989510}
   m_IsPrefabParent: 1
---- !u!1 &1763788915114938
+--- !u!1 &1340187211989510
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4144124290922728}
-  - component: {fileID: 114385617719845946}
+  - component: {fileID: 4875954465164902}
+  - component: {fileID: 114276244582061258}
+  - component: {fileID: 114555553425702154}
   m_Layer: 0
-  m_Name: TestWorld
+  m_Name: GameInput
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4144124290922728
+--- !u!4 &4875954465164902
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763788915114938}
+  m_GameObject: {fileID: 1340187211989510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,15 +41,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114385617719845946
+--- !u!114 &114276244582061258
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763788915114938}
+  m_GameObject: {fileID: 1340187211989510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d759c5ec6991924d85744959ae54a16, type: 3}
+  m_Script: {fileID: 11500000, guid: aea725207d399ca45a1df3abb242ff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldConfig: {fileID: 11400000, guid: a396dbafbfee88947bb5437c27555708, type: 2}
+  loggingEnabled: 1
+  loggingColor: {r: 0.5, g: 0.2793103, b: 0, a: 1}
+--- !u!114 &114555553425702154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1340187211989510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c441f1a1b5446014999ff7336124cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0, g: 0.39695752, b: 0.5588235, a: 1}
