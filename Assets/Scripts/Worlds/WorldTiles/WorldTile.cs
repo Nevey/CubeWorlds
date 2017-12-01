@@ -1,19 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds.WorldTiles
 {
 	public class WorldTile : MonoBehaviour
 	{
+		// TODO: Shove into own scriptable object
+		[SerializeField] private WalkablePlane walkablePlanePrefab;
+
+		[Tooltip("The distance from the surface of the world tile")]
+		[SerializeField] private float walkablePlaneDistance = 0.01f;
+
 		private WorldTileCoordinates coordinates = new WorldTileCoordinates();
 
 		private WorldTileState state = new WorldTileState();
 
 		private WorldTileWalkableSides walkableSides = new WorldTileWalkableSides();
 
+		private List<WalkablePlane> walkablePlanes = new List<WalkablePlane>();
+
 		public WorldTileCoordinates Coordinates { get { return coordinates; } }
 
 		public WorldTileState State { get { return state; } }
+
+		private void CreateWalkablePlanes()
+		{
+			// First destroy old walkable planes
+			DestroyWalkablePlanes();
+
+			for (int i = 0; i < walkableSides.WalkableSidesList.Count; i++)
+			{
+				float worldTileHalfSize = GetComponent<Renderer>().bounds.size.x / 2f;
+
+				float offset = worldTileHalfSize + walkablePlaneDistance;
+				
+				WorldTileWalkableSide walkableSide = walkableSides.WalkableSidesList[i];
+
+				WalkablePlane walkablePlane = Instantiate(walkablePlanePrefab);
+
+				walkablePlane.transform.parent = transform;
+
+				walkablePlane.Setup(walkableSide, offset);
+			}
+		}
+
+		private void DestroyWalkablePlanes()
+		{
+			for (int i = 0; i < walkablePlanes.Count; i++)
+			{
+				Destroy(walkablePlanes[i].gameObject);
+			}
+
+			walkablePlanes.Clear();
+		}
 
 		public void Setup(int x, int y, int z)
 		{
@@ -24,7 +64,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			state = WorldTileState.Alive;
 		}
 
-		public void UpdateWalkableSides(WorldTile[,,] worldTiles, WorldConfig worldConfig)
+		public void UpdateWalkableSides(WorldTile[,,] worldTiles, WorldConfig worldConfig, bool debug = false)
 		{
 			// First try to find surrounding tiles
 			WorldTile leftTile 		= null;
@@ -121,6 +161,8 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			{
 				walkableSides.Add(WorldTileWalkableSide.Rear);
 			}
+
+			CreateWalkablePlanes();
 		}
 	}
 }

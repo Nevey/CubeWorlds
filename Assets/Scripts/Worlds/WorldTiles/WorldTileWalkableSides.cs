@@ -6,7 +6,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
     {
         private List<WorldTileWalkableSide> walkableSides = new List<WorldTileWalkableSide>();
 
-        public List<WorldTileWalkableSide> WalkableSides { get { return walkableSides; } }
+        public List<WorldTileWalkableSide> WalkableSidesList { get { return walkableSides; } }
 
         public void Add(WorldTileWalkableSide walkableSide)
         {

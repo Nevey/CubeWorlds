@@ -17,6 +17,8 @@ namespace CCore.CubeWorlds.Worlds
 	{
 		[SerializeField] private WorldConfig config;
 
+		[SerializeField] private bool debugWalkableSides;
+
 		/// <summary>
 		/// This is the 3D grid of the world
 		/// </summary>
@@ -89,7 +91,7 @@ namespace CCore.CubeWorlds.Worlds
 			
 			worldTile.transform.parent = transform;
 			
-			worldTile.name = config.name + "'s tile[" + x + ", " + y + ", " + z + "]";
+			worldTile.name = config.Name + "'s tile[" + x + ", " + y + ", " + z + "]";
 
 			return worldTile;
 		}
@@ -98,7 +100,7 @@ namespace CCore.CubeWorlds.Worlds
 		{
 			for (int i = 0; i < flattenedGrid.Count; i++)
 			{
-				flattenedGrid[i].UpdateWalkableSides(grid, config);
+				flattenedGrid[i].UpdateWalkableSides(grid, config, debugWalkableSides);
 			}
 		}
 	}

@@ -10,7 +10,7 @@ namespace CCore
 	{
 		[SerializeField] private bool loggingEnabled = true;
 
-		[SerializeField] private Color loggingColor = Color.gray;
+		[SerializeField] private Color loggingColor = Color.black;
 
 		private void DoLog(
             Action<string> logCall,

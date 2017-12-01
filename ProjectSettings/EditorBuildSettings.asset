@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Features/Input.unity
     guid: f1d8d5115c2bdfb42b2d273d5cc70c6b
   - enabled: 1
-    path: Assets/Scenes/main.unity
-    guid: e8d6a15bb02dd0e4fbddd45438bd745c
+    path: Assets/Scenes/Features/Camera.unity
+    guid: ce65765cbc9b17c4aaf4198944e2a8b2
+  - enabled: 1
+    path: Assets/Scenes/Features/WorldScenes/TestWorld.unity
+    guid: e0cb580e7cda5d7479f927467a85169e

@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Name: WorldConfig_test
   m_EditorClassIdentifier: 
   id: 0
-  name: test world
-  worldSize: 5
-  cubePrefab: {fileID: 1072246668613992, guid: f0d6e5bc7d94d91429688cb890e92b8d, type: 2}
-  spaceBetweenCubes: 0.1
-  tilePrefab: {fileID: 1739377979807632, guid: d6e257ed99b21c0429b38e62967c30d0, type: 2}
-  tileDistanceFromWorld: 0.02
+  name: TestWorld
+  worldSize: 15
+  worldTile: {fileID: 114126208116249200, guid: 325dac9f0654f7840b7c1f6e55143ce4,
+    type: 2}
+  spaceBetweenCubes: 0

@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loggingEnabled: 0
-  loggingColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  worldConfig: {fileID: 11400000, guid: a396dbafbfee88947bb5437c27555708, type: 2}
+  loggingColor: {r: 0, g: 0, b: 0, a: 1}
+  config: {fileID: 11400000, guid: a396dbafbfee88947bb5437c27555708, type: 2}
+  debugWalkableSides: 0
