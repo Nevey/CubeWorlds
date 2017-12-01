@@ -74,7 +74,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			WorldTile frontTile 	= null;
 			WorldTile rearTile 		= null;
 			
-			if (coordinates.left > 0)
+			if (coordinates.left >= 0)
 			{
 				leftTile = worldTiles[
 					coordinates.left,
@@ -83,7 +83,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.right < worldConfig.WorldSize - 1)
+			if (coordinates.right < worldConfig.WorldSize)
 			{
 				rightTile = worldTiles[
 					coordinates.right,
@@ -92,7 +92,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.bottom > 0)
+			if (coordinates.bottom >= 0)
 			{
 				bottomTile = worldTiles[
 					coordinates.x,
@@ -101,7 +101,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.top < worldConfig.WorldSize - 1)
+			if (coordinates.top < worldConfig.WorldSize)
 			{
 				topTile = worldTiles[
 					coordinates.x,
@@ -110,7 +110,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.front > 0)
+			if (coordinates.front >= 0)
 			{
 				frontTile = worldTiles[
 					coordinates.x,
@@ -119,7 +119,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.rear < worldConfig.WorldSize - 1)
+			if (coordinates.rear < worldConfig.WorldSize)
 			{
 				rearTile = worldTiles[
 					coordinates.x,
