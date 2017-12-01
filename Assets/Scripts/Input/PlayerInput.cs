@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CCore.CubeWorlds.GameInput
 {
 	[RequireComponent(typeof(KeyboardInput))]
-	public class PlayerInput : Monobehaviour
+	public class PlayerInput : MonoBehaviour
 	{
 		private KeyboardInput keyboardInput;
 

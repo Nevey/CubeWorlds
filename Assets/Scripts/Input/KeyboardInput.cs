@@ -6,7 +6,7 @@ namespace CCore.CubeWorlds.GameInput
 	/// <summary>
 	/// This class handles input from both keyboard and mouse
 	/// </summary>
-	public class KeyboardInput : Monobehaviour
+	public class KeyboardInput : MonoBehaviour
 	{
 		private KeyboardInputArgs keyboardInputArgs;
 

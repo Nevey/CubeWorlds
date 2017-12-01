@@ -6,11 +6,11 @@ namespace CCore
 	/// <summary>
 	/// CCore's Monobehaviour extension
 	/// </summary>
-	public class Monobehaviour : UnityEngine.MonoBehaviour
+	public class MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		[SerializeField] private bool loggingEnabled = true;
 
-		[SerializeField] private Color loggingColor = UnityEngine.Color.gray;
+		[SerializeField] private Color loggingColor = Color.gray;
 
 		private void DoLog(
             Action<string> logCall,
@@ -18,7 +18,7 @@ namespace CCore
             params object[] args)
         {
             // TODO: Check if "!Debug.isDebugBuild" is needed
-			if (!loggingEnabled || !UnityEngine.Debug.isDebugBuild)
+			if (!loggingEnabled || !Debug.isDebugBuild)
 			{
 				return;
 			}
@@ -35,19 +35,20 @@ namespace CCore
 
         public void Log(string str, params object[] args)
         {
-            DoLog(UnityEngine.Debug.Log, str, args);
+            DoLog(Debug.Log, str, args);
         }
 
         public void LogWarning(string str, params object[] args)
         {
-            DoLog(UnityEngine.Debug.LogWarning, str, args);
+            DoLog(Debug.LogWarning, str, args);
         }
 
         public void LogError(string str, params object[] args)
         {
-            DoLog(UnityEngine.Debug.LogError, str, args);
+            DoLog(Debug.LogError, str, args);
         }
 
+		// TODO: Move this to it's own class
 		private string ToRGBHex(Color color)
 		{
 			return string.Format(
