@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace CCore.CubeWorlds.Worlds.WorldTiles
 {
+    /// <summary>
+    /// Holds the walkable sides of a world tile
+    /// </summary>
     public class WorldTileWalkableSides
     {
         private List<WorldTileWalkableSide> walkableSides = new List<WorldTileWalkableSide>();

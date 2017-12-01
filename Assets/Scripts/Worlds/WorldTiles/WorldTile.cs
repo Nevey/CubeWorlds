@@ -24,6 +24,10 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 
 		public WorldTileState State { get { return state; } }
 
+		public List<WalkablePlane> WalkablePlanes { get { return walkablePlanes; } }
+
+		public bool IsSurfaced { get { return walkablePlanes.Count > 0; } }
+
 		private void CreateWalkablePlanes()
 		{
 			// First destroy old walkable planes
@@ -42,6 +46,8 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				walkablePlane.transform.parent = transform;
 
 				walkablePlane.Setup(walkableSide, offset);
+
+				walkablePlanes.Add(walkablePlane);
 			}
 		}
 
@@ -64,7 +70,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			state = WorldTileState.Alive;
 		}
 
-		public void UpdateWalkableSides(WorldTile[,,] worldTiles, WorldConfig worldConfig, bool debug = false)
+		public void UpdateWalkableArea(WorldTile[,,] worldTiles, WorldConfig worldConfig, bool debug = false)
 		{
 			// First try to find surrounding tiles
 			WorldTile leftTile 		= null;
@@ -163,6 +169,13 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			}
 
 			CreateWalkablePlanes();
+		}
+
+		public WalkablePlane GetRandomWalkablePlane()
+		{
+			int randomIndex = UnityEngine.Random.Range(0, walkablePlanes.Count);
+
+			return walkablePlanes[randomIndex];
 		}
 	}
 }

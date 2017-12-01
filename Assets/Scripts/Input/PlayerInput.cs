@@ -10,7 +10,7 @@ namespace CCore.CubeWorlds.GameInput
 
 		private PlayerInputArgs playerInputArgs;
 
-		public event EventHandler<PlayerInputArgs> PlayerInputEvent;
+		public static event EventHandler<PlayerInputArgs> PlayerInputEvent;
 
 		private void Start()
 		{
@@ -26,34 +26,30 @@ namespace CCore.CubeWorlds.GameInput
             switch (e.keyCode)
 			{
 				case KeyCode.LeftArrow:
-				
-					DispatchPlayerInput(PlayerInputType.Left, e.inputState);
-
-				break;
+					DispatchPlayerInput(PlayerInputType.MoveUp, e.inputState);
+					break;
 
 				case KeyCode.RightArrow:
-
-					DispatchPlayerInput(PlayerInputType.Right, e.inputState);
-
-				break;
+					DispatchPlayerInput(PlayerInputType.MoveRight, e.inputState);
+					break;
 
 				case KeyCode.UpArrow:
-
-					DispatchPlayerInput(PlayerInputType.Up, e.inputState);
-
-				break;
+					DispatchPlayerInput(PlayerInputType.MoveLeft, e.inputState);
+					break;
 
 				case KeyCode.DownArrow:
-
-					DispatchPlayerInput(PlayerInputType.Down, e.inputState);
-
-				break;
+					DispatchPlayerInput(PlayerInputType.MoveDown, e.inputState);
+					break;
+				
+				case KeyCode.T:
+					DispatchPlayerInput(PlayerInputType.DebugSpawn, e.inputState);
+					break;
 			}
         }
 
 		private void DispatchPlayerInput(PlayerInputType playerInputType, InputState inputState)
 		{
-			Log("KeyboardInput.DispatchPlayerInput -- PlayerInputType: " + playerInputType + " InputState: " + inputState);
+			Log("KeyboardInput.DispatchPlayerInput -- " + playerInputType + " : " + inputState);
 
 			if (PlayerInputEvent != null)
 			{

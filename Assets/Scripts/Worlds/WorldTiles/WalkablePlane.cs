@@ -5,8 +5,14 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 {
 	public class WalkablePlane : MonoBehaviour
 	{
+		private WorldTileWalkableSide walkableSide;
+
+		public WorldTileWalkableSide WalkableSide { get { return walkableSide; } }
+
 		public void Setup(WorldTileWalkableSide walkableSide, float offset)
 		{
+			this.walkableSide = walkableSide;
+			
 			Vector3 position = transform.parent.position;
 
 			Vector3 rotation = transform.parent.localRotation.eulerAngles;

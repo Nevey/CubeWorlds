@@ -33,6 +33,8 @@ namespace CCore.CubeWorlds.Worlds
 
 		public WorldTile[,,] Grid { get { return grid; } }
 
+		public List<WorldTile> FlattenedGrid { get { return flattenedGrid; } }
+
 		private void Start()
 		{
 			CreateWorld();
@@ -100,8 +102,41 @@ namespace CCore.CubeWorlds.Worlds
 		{
 			for (int i = 0; i < flattenedGrid.Count; i++)
 			{
-				flattenedGrid[i].UpdateWalkableSides(grid, config, debugWalkableSides);
+				flattenedGrid[i].UpdateWalkableArea(grid, config, debugWalkableSides);
 			}
+		}
+
+		private List<WorldTile> GetSurfacedWorldTiles()
+		{
+			List<WorldTile> surfacedWorldTiles = new List<WorldTile>();
+
+			for (int i = 0; i < flattenedGrid.Count; i++)
+			{
+				WorldTile worldTile = flattenedGrid[i];
+
+				if (worldTile.IsSurfaced)
+				{
+					surfacedWorldTiles.Add(worldTile);
+				}
+			}
+
+			return surfacedWorldTiles;
+		}
+
+		public WorldTile GetRandomWorldTile()
+		{
+			int randomIndex = Random.Range(0, flattenedGrid.Count);
+
+			return flattenedGrid[randomIndex];
+		}
+
+		public WorldTile GetRandomSurfacedWorldTile()
+		{
+			List<WorldTile> surfacedWorldTiles = GetSurfacedWorldTiles();
+
+			int randomIndex = Random.Range(0, surfacedWorldTiles.Count);
+
+			return surfacedWorldTiles[randomIndex];
 		}
 	}
 }

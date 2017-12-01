@@ -49,7 +49,7 @@ namespace CCore.CubeWorlds.GameInput
 
 		private void DispatchKeyboardInput(KeyCode keyCode, InputState inputState)
 		{
-			Log("KeyboardInput.DispatchKeyboardInput -- KeyCode: " + keyCode + " InputState: " + inputState);
+			Log("KeyboardInput.DispatchKeyboardInput -- " + keyCode + " : " + inputState);
 
 			if (KeyboardInputEvent != null)
 			{

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: TestWorld
-  worldSize: 15
+  worldSize: 5
   worldTile: {fileID: 114126208116249200, guid: 325dac9f0654f7840b7c1f6e55143ce4,
     type: 2}
   spaceBetweenCubes: 0
