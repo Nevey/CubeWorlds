@@ -18,7 +18,7 @@ namespace CCore.CubeWorlds.Players
 
 			// transform.eulerAngles = Vector3.zero;
 
-			CameraTransitioner.Instance.DoTransitionInstant(cameraSlot, transform);
+			CameraController.Instance.SetCameraSlot(cameraSlot, transform);
 
 			// transform.eulerAngles = rotation;
 		}

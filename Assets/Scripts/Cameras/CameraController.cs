@@ -8,7 +8,7 @@ namespace CCore.CubeWorlds.Cameras
 	/// </summary>
 	[RequireComponent(typeof(Camera))]
 	[RequireComponent(typeof(CameraLookAt))]
-	public class CameraTransitioner : MonoBehaviour
+	public class CameraController : MonoBehaviour
 	{
 		private new Camera camera;
 
@@ -16,7 +16,7 @@ namespace CCore.CubeWorlds.Cameras
 
 		private CameraSlot cameraSlot;
 
-		public static CameraTransitioner Instance;
+		public static CameraController Instance;
 
 		private void Awake()
 		{
@@ -46,7 +46,7 @@ namespace CCore.CubeWorlds.Cameras
 			// transform.eulerAngles = test;
 		}
 
-		public void DoTransitionInstant(CameraSlot cameraSlot, Transform lookAtTarget)
+		public void SetCameraSlot(CameraSlot cameraSlot, Transform lookAtTarget)
 		{
 			this.cameraSlot = cameraSlot;
 

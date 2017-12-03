@@ -10,7 +10,7 @@ namespace CCore.CubeWorlds.Worlds
 
         public void OnWorldEnable()
         {
-            CameraTransitioner.Instance.DoTransitionInstant(cameraSlot, transform);
+            CameraController.Instance.SetCameraSlot(cameraSlot, transform);
         }
 
         public void OnWorldDisable()
