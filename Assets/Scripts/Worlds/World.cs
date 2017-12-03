@@ -39,6 +39,7 @@ namespace CCore.CubeWorlds.Worlds
 
 		private void Start()
 		{
+			// TODO: Add a world controller, making sure only one world is active at a time
 			CreateWorld();
 		}
 

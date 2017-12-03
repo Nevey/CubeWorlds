@@ -26,7 +26,7 @@ namespace CCore.CubeWorlds.GameInput
             switch (e.keyCode)
 			{
 				case KeyCode.LeftArrow:
-					DispatchPlayerInput(PlayerInputType.MoveUp, e.inputState);
+					DispatchPlayerInput(PlayerInputType.MoveLeft, e.inputState);
 					break;
 
 				case KeyCode.RightArrow:
@@ -34,11 +34,11 @@ namespace CCore.CubeWorlds.GameInput
 					break;
 
 				case KeyCode.UpArrow:
-					DispatchPlayerInput(PlayerInputType.MoveLeft, e.inputState);
+					DispatchPlayerInput(PlayerInputType.MoveForward, e.inputState);
 					break;
 
 				case KeyCode.DownArrow:
-					DispatchPlayerInput(PlayerInputType.MoveDown, e.inputState);
+					DispatchPlayerInput(PlayerInputType.MoveBackward, e.inputState);
 					break;
 				
 				case KeyCode.T:

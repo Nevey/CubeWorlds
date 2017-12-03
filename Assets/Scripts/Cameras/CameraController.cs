@@ -14,8 +14,6 @@ namespace CCore.CubeWorlds.Cameras
 
 		private CameraLookAt cameraLookAt;
 
-		private CameraSlot cameraSlot;
-
 		public static CameraController Instance;
 
 		private void Awake()
@@ -27,36 +25,9 @@ namespace CCore.CubeWorlds.Cameras
 			cameraLookAt = GetComponent<CameraLookAt>();
 		}
 
-		private void Update()
-		{
-			FollowCameraSlot();
-		}
-
-		private void FollowCameraSlot()
-		{
-			if (!cameraSlot)
-			{
-				return;
-			}
-
-			// Vector3 test = transform.eulerAngles;
-
-			// test.z = cameraSlot.transform.eulerAngles.z;
-
-			// transform.eulerAngles = test;
-		}
-
 		public void SetCameraSlot(CameraSlot cameraSlot, Transform lookAtTarget)
 		{
-			this.cameraSlot = cameraSlot;
-
-			camera.fieldOfView = cameraSlot.FieldOfFiew;
-
-			transform.parent = cameraSlot.transform;
-
-			transform.position = cameraSlot.transform.position;
-
-			// transform.localRotation = cameraSlot.transform.localRotation;
+			cameraSlot.AddCamera(camera);
 
 			cameraLookAt.SetTarget(lookAtTarget);
 		}

@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4162505732449914}
   - component: {fileID: 114667628183552918}
+  - component: {fileID: 114893686749100180}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -93,7 +94,7 @@ GameObject:
   m_Layer: 0
   m_Name: CameraSlot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -6431860639581277017, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -118,15 +119,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1024766829965788}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0033637686, y: 0.16, z: -0.00521563}
   m_LocalScale: {x: 0.16075847, y: 0.16075847, z: 0.16075847}
   m_Children:
   - {fileID: 4885397485738100}
   - {fileID: 4348185118346396}
   m_Father: {fileID: 4162505732449914}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4348185118346396
 Transform:
   m_ObjectHideFlags: 1
@@ -147,7 +148,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1832188803358294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.88, y: 1.18, z: 0}
+  m_LocalPosition: {x: 0, y: 1.18, z: -0.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4162505732449914}
@@ -342,6 +343,20 @@ MonoBehaviour:
   loggingEnabled: 1
   loggingColor: {r: 0, g: 0, b: 0, a: 1}
   fieldOfView: 48.3
+--- !u!114 &114893686749100180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1084252482007588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff5189ab82fd5b40b94a45c3e8d1a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggingEnabled: 1
+  loggingColor: {r: 0, g: 0, b: 0, a: 1}
+  movementSpeed: 0.02
 --- !u!136 &136855656124886394
 CapsuleCollider:
   m_ObjectHideFlags: 1

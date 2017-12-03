@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds
 {
+	// TODO: Move to Worlds folder, and rename to WorldPlayerSpawner
 	[RequireComponent(typeof(World))]
 	public class PlayerSpawner : MonoBehaviour, IWorldEnabler
 	{
@@ -87,6 +88,14 @@ namespace CCore.CubeWorlds.Worlds
 			}
 		}
 
+		private void DisableSpawnCheat()
+		{
+			if (Debug.isDebugBuild)
+			{
+				PlayerInput.PlayerInputEvent -= OnPlayerInputEvent;
+			}
+		}
+
 		public void OnWorldEnable()
 		{
 			EnableSpawnCheat();
@@ -94,7 +103,7 @@ namespace CCore.CubeWorlds.Worlds
 
 		public void OnWorldDisable()
 		{
-
+			DisableSpawnCheat();
 		}
     }
 }

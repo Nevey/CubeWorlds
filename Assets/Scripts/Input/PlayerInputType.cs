@@ -2,10 +2,10 @@ namespace CCore.CubeWorlds.GameInput
 {
     public enum PlayerInputType
     {
-        MoveUp,
+        MoveForward,
         MoveRight,
         MoveLeft,
-        MoveDown,
+        MoveBackward,
         DebugSpawn
     }
 }

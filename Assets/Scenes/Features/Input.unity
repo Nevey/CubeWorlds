@@ -151,16 +151,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114276244582061258, guid: 91f275dcd0b355c438a4980a971ff6bb,
-        type: 2}
-      propertyPath: loggingEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114555553425702154, guid: 91f275dcd0b355c438a4980a971ff6bb,
-        type: 2}
-      propertyPath: loggingEnabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91f275dcd0b355c438a4980a971ff6bb, type: 2}
   m_IsPrefabParent: 0

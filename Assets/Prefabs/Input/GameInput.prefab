@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1340187211989510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea725207d399ca45a1df3abb242ff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
-  loggingColor: {r: 0.5, g: 0.2793103, b: 0, a: 1}
+  loggingEnabled: 0
+  loggingColor: {r: 0, g: 0.39607847, b: 0.56078434, a: 1}
 --- !u!114 &114555553425702154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,5 +65,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c441f1a1b5446014999ff7336124cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0, g: 0.39695752, b: 0.5588235, a: 1}

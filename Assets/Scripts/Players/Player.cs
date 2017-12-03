@@ -10,17 +10,30 @@ namespace CCore.CubeWorlds.Players
 
 		[SerializeField] private CameraSlot cameraSlot;
 
+		private IPlayerEnabler[] playerEnablers;
+
 		public Renderer Renderer { get { return renderer; } }
+
+		public CameraSlot CameraSlot { get { return cameraSlot; } }
 
 		public void Activate()
 		{
-			// Vector3 rotation = transform.eulerAngles;
-
-			// transform.eulerAngles = Vector3.zero;
-
 			CameraController.Instance.SetCameraSlot(cameraSlot, transform);
 
-			// transform.eulerAngles = rotation;
+			playerEnablers = GetComponentsInChildren<IPlayerEnabler>();
+
+			for (int i = 0; i < playerEnablers.Length; i++)
+			{
+				playerEnablers[i].OnPlayerEnabled();
+			}
+		}
+
+		public void Deactivate()
+		{
+			for (int i = 0; i < playerEnablers.Length; i++)
+			{
+				playerEnablers[i].OnPlayerDisabled();
+			}
 		}
 	}
 }
