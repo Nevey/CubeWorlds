@@ -37,6 +37,8 @@ namespace CCore.CubeWorlds.Worlds
 					WalkableSideToRotation(walkablePlane.WalkableSide)
 				);
 
+				player.Activate();
+
 				Log("Spawned player on coordinate [" 
 					+ worldTile.Coordinates.x + ", " + worldTile.Coordinates.y + ", " + worldTile.Coordinates.z
 					+ "] on the " + walkablePlane.WalkableSide + " side.");

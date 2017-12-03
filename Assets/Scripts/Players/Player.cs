@@ -1,4 +1,5 @@
 ﻿using System;
+using CCore.CubeWorlds.Cameras;
 using UnityEngine;
 
 namespace CCore.CubeWorlds.Players
@@ -7,16 +8,19 @@ namespace CCore.CubeWorlds.Players
 	{
 		[SerializeField] private new Renderer renderer;
 
+		[SerializeField] private CameraSlot cameraSlot;
+
 		public Renderer Renderer { get { return renderer; } }
 
-		private void Start()
+		public void Activate()
 		{
-			
-		}
-		
-		private void Update()
-		{
-			
+			// Vector3 rotation = transform.eulerAngles;
+
+			// transform.eulerAngles = Vector3.zero;
+
+			CameraTransitioner.Instance.DoTransitionInstant(cameraSlot, transform);
+
+			// transform.eulerAngles = rotation;
 		}
 	}
 }
