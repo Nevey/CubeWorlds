@@ -9,6 +9,11 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 
 		public WorldTileWalkableSide WalkableSide { get { return walkableSide; } }
 
+		private void Awake()
+		{
+			GetComponent<Renderer>().enabled = false;
+		}
+
 		public void Setup(WorldTileWalkableSide walkableSide, float offset)
 		{
 			this.walkableSide = walkableSide;

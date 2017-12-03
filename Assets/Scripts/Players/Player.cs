@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CCore
+namespace CCore.CubeWorlds.Players
 {
 	public class Player : MonoBehaviour
 	{

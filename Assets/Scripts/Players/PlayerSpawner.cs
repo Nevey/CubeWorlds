@@ -1,12 +1,13 @@
 ﻿using System;
 using CCore.CubeWorlds.GameInput;
+using CCore.CubeWorlds.Players;
 using CCore.CubeWorlds.Worlds.WorldTiles;
 using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds
 {
 	[RequireComponent(typeof(World))]
-	public class PlayerSpawner : MonoBehaviour
+	public class PlayerSpawner : MonoBehaviour, IWorldEnabler
 	{
 		[SerializeField] private Player playerPrefab;
 
@@ -15,12 +16,6 @@ namespace CCore.CubeWorlds.Worlds
 		private void Start()
 		{
 			world = GetComponent<World>();
-
-			// TODO: Add world activator, use interfaces to enable/disable worlds and their components
-			if (Debug.isDebugBuild)
-			{
-				PlayerInput.PlayerInputEvent += OnPlayerInputEvent;
-			}
 		}
 
         private void OnPlayerInputEvent(object sender, PlayerInputArgs e)
@@ -42,7 +37,9 @@ namespace CCore.CubeWorlds.Worlds
 					WalkableSideToRotation(walkablePlane.WalkableSide)
 				);
 
-				Log("Spawned player on side: " + walkablePlane.WalkableSide);
+				Log("Spawned player on coordinate [" 
+					+ worldTile.Coordinates.x + ", " + worldTile.Coordinates.y + ", " + worldTile.Coordinates.z
+					+ "] on the " + walkablePlane.WalkableSide + " side.");
 			}
         }
 
@@ -78,6 +75,24 @@ namespace CCore.CubeWorlds.Worlds
 			}
 
 			return rotation;
+		}
+
+		private void EnableSpawnCheat()
+		{
+			if (Debug.isDebugBuild)
+			{
+				PlayerInput.PlayerInputEvent += OnPlayerInputEvent;
+			}
+		}
+
+		public void OnWorldEnable()
+		{
+			EnableSpawnCheat();
+		}
+
+		public void OnWorldDisable()
+		{
+
 		}
     }
 }

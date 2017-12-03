@@ -29,6 +29,8 @@ namespace CCore.CubeWorlds.Worlds
 		/// </summary>
 		private List<WorldTile> flattenedGrid = new List<WorldTile>();
 
+		private IWorldEnabler[] iWorldEnablers;
+
 		public WorldConfig Config { get { return config; } }
 
 		public WorldTile[,,] Grid { get { return grid; } }
@@ -45,6 +47,8 @@ namespace CCore.CubeWorlds.Worlds
 			CreateWorldGrid();
 
 			UpdateWorldGrid();
+
+			EnableWorld();
 		}
 
 		private void CreateWorldGrid()
@@ -103,6 +107,24 @@ namespace CCore.CubeWorlds.Worlds
 			for (int i = 0; i < flattenedGrid.Count; i++)
 			{
 				flattenedGrid[i].UpdateWalkableArea(grid, config, debugWalkableSides);
+			}
+		}
+
+		private void EnableWorld()
+		{
+			iWorldEnablers = GetComponentsInChildren<IWorldEnabler>();
+
+			for (int i = 0; i < iWorldEnablers.Length; i++)
+			{
+				iWorldEnablers[i].OnWorldEnable();
+			}
+		}
+
+		private void DisableWorld()
+		{
+			for (int i = 0; i < iWorldEnablers.Length; i++)
+			{
+				iWorldEnablers[i].OnWorldDisable();
 			}
 		}
 
