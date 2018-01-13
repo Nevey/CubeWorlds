@@ -36,8 +36,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4144124290922728}
   - component: {fileID: 114385617719845946}
-  - component: {fileID: 114472019920131636}
   - component: {fileID: 114680551410427130}
+  - component: {fileID: 114563546077297264}
   m_Layer: 0
   m_Name: TestWorld
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   loggingColor: {r: 0, g: 0, b: 0, a: 1}
   config: {fileID: 11400000, guid: a396dbafbfee88947bb5437c27555708, type: 2}
   debugWalkableSides: 1
---- !u!114 &114472019920131636
+--- !u!114 &114563546077297264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,11 +109,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763788915114938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c62a7c07d41bd4e98eb6793db8a3f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 32e3613a9883f0d48900908ad4a7409e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 0
-  loggingColor: {r: 0.24411759, g: 0.42647058, b: 0, a: 1}
+  loggingEnabled: 1
+  loggingColor: {r: 0, g: 0, b: 0, a: 1}
   playerPrefab: {fileID: 114667628183552918, guid: 7206db18a4edd214f8cd9879e82390e6,
     type: 2}
 --- !u!114 &114680551410427130

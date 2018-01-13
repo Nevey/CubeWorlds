@@ -6,9 +6,8 @@ using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds
 {
-	// TODO: Move to Worlds folder, and rename to WorldPlayerSpawner
 	[RequireComponent(typeof(World))]
-	public class PlayerSpawner : MonoBehaviour, IWorldEnabler
+	public class WorldPlayerSpawner : MonoBehaviour, IWorldEnabler
 	{
 		[SerializeField] private Player playerPrefab;
 
@@ -21,64 +20,27 @@ namespace CCore.CubeWorlds.Worlds
 
         private void OnPlayerInputEvent(object sender, PlayerInputArgs e)
         {
-            if (e.playerInputType == PlayerInputType.SpawnCheat
-				&& e.inputState == InputState.Down)
+            if (e.inputState == InputState.Down
+				&& e.playerInputType == PlayerInputType.SpawnCheat)
 			{
 				WorldTile worldTile = world.GetRandomSurfacedWorldTile();
 
-				WalkablePlane walkablePlane = worldTile.GetRandomWalkablePlane();
+				WorldTileSurface worldTileSurface = worldTile.GetRandomWalkablePlane();
 
 				Player player = Instantiate(playerPrefab);
 
+				// TODO: Set different parent, higher up in hierarchy
 				player.transform.parent = worldTile.transform.parent;
 
-				player.transform.position = walkablePlane.transform.position;
-
-				player.transform.localRotation = Quaternion.Euler(
-					WalkableSideToRotation(walkablePlane.WalkableSide)
-				);
+				player.transform.position = worldTileSurface.transform.position;
 
 				player.Activate();
 
 				Log("Spawned player on coordinate [" 
 					+ worldTile.Coordinates.x + ", " + worldTile.Coordinates.y + ", " + worldTile.Coordinates.z
-					+ "] on the " + walkablePlane.WalkableSide + " side.");
+					+ "] on the " + worldTileSurface.SurfaceRotation + " side.");
 			}
         }
-
-		private Vector3 WalkableSideToRotation(WorldTileWalkableSide walkableSide)
-		{
-			Vector3 rotation = Vector3.zero;
-
-			switch (walkableSide)
-			{
-				case WorldTileWalkableSide.Left:
-					rotation.z += 90f;
-					break;
-				
-				case WorldTileWalkableSide.Right:
-					rotation.z -= 90f;
-					break;
-				
-				case WorldTileWalkableSide.Bottom:
-					rotation.z += 180f;
-					break;
-				
-				case WorldTileWalkableSide.Top:
-					break;
-				
-				case WorldTileWalkableSide.Front:
-					rotation.x -= 90f;
-					break;
-				
-				case WorldTileWalkableSide.Rear:
-					rotation.x += 90f;
-					break;
-				
-			}
-
-			return rotation;
-		}
 
 		private void EnableSpawnCheat()
 		{

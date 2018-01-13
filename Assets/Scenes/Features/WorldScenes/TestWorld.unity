@@ -216,8 +216,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114472019920131636, guid: 87edb2126aeb9034b96bb3d2debcf100,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: loggingEnabled
       value: 0
       objectReference: {fileID: 0}

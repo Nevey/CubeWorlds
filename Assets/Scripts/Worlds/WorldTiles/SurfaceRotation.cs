@@ -1,6 +1,6 @@
 namespace CCore.CubeWorlds.Worlds.WorldTiles
 {
-    public enum WorldTileWalkableSide
+    public enum SurfaceRotation
     {
         Left,
         Right,

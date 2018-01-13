@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds.WorldTiles
 {
-	public class WalkablePlane : MonoBehaviour
+	public class WorldTileSurface : MonoBehaviour
 	{
-		private WorldTileWalkableSide walkableSide;
+		private SurfaceRotation surfaceRotation;
 
-		public WorldTileWalkableSide WalkableSide { get { return walkableSide; } }
+		public SurfaceRotation SurfaceRotation { get { return surfaceRotation; } }
 
 		private void Awake()
 		{
 			GetComponent<Renderer>().enabled = false;
 		}
 
-		public void Setup(WorldTileWalkableSide walkableSide, float offset)
+		public void Setup(SurfaceRotation walkableSide, float offset)
 		{
-			this.walkableSide = walkableSide;
+			this.surfaceRotation = walkableSide;
 			
 			Vector3 position = transform.parent.position;
 
@@ -24,31 +24,31 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 
 			switch (walkableSide)
 			{
-				case WorldTileWalkableSide.Left:
+				case SurfaceRotation.Left:
 					position.x -= offset;
 					rotation.y += 90f;
 					break;
 
-				case WorldTileWalkableSide.Right:
+				case SurfaceRotation.Right:
 					position.x += offset;
 					rotation.y -= 90f;
 					break;
 
-				case WorldTileWalkableSide.Bottom:
+				case SurfaceRotation.Bottom:
 					position.y -= offset;
 					rotation.x -= 90f;
 					break;
 
-				case WorldTileWalkableSide.Top:
+				case SurfaceRotation.Top:
 					position.y += offset;
 					rotation.x += 90f;
 					break;
 
-				case WorldTileWalkableSide.Front:
+				case SurfaceRotation.Front:
 					position.z -= offset;
 					break;
 
-				case WorldTileWalkableSide.Rear:
+				case SurfaceRotation.Rear:
 					position.z += offset;
 					rotation.y += 180f;
 					break;

@@ -7,7 +7,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 	public class WorldTile : MonoBehaviour
 	{
 		// TODO: Shove into own scriptable object
-		[SerializeField] private WalkablePlane walkablePlanePrefab;
+		[SerializeField] private WorldTileSurface walkablePlanePrefab;
 
 		[Tooltip("The distance from the surface of the world tile")]
 		[SerializeField] private float walkablePlaneDistance = 0.01f;
@@ -16,49 +16,49 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 
 		private WorldTileState state = new WorldTileState();
 
-		private WorldTileWalkableSides walkableSides = new WorldTileWalkableSides();
+		private SurfaceRotations surfaceRotations = new SurfaceRotations();
 
-		private List<WalkablePlane> walkablePlanes = new List<WalkablePlane>();
+		private List<WorldTileSurface> surfaces = new List<WorldTileSurface>();
 
 		public WorldTileCoordinates Coordinates { get { return coordinates; } }
 
 		public WorldTileState State { get { return state; } }
 
-		public List<WalkablePlane> WalkablePlanes { get { return walkablePlanes; } }
+		public List<WorldTileSurface> WorldTileSurfaces { get { return surfaces; } }
 
-		public bool IsSurfaced { get { return walkablePlanes.Count > 0; } }
+		public bool IsSurfaced { get { return surfaces.Count > 0; } }
 
 		private void CreateWalkablePlanes()
 		{
 			// First destroy old walkable planes
 			DestroyWalkablePlanes();
 
-			for (int i = 0; i < walkableSides.WalkableSidesList.Count; i++)
+			for (int i = 0; i < surfaceRotations.SurfaceRotationList.Count; i++)
 			{
 				float worldTileHalfSize = GetComponent<Renderer>().bounds.size.x / 2f;
 
 				float offset = worldTileHalfSize + walkablePlaneDistance;
 				
-				WorldTileWalkableSide walkableSide = walkableSides.WalkableSidesList[i];
+				SurfaceRotation surfaceRotation = surfaceRotations.SurfaceRotationList[i];
 
-				WalkablePlane walkablePlane = Instantiate(walkablePlanePrefab);
+				WorldTileSurface walkablePlane = Instantiate(walkablePlanePrefab);
 
 				walkablePlane.transform.parent = transform;
 
-				walkablePlane.Setup(walkableSide, offset);
+				walkablePlane.Setup(surfaceRotation, offset);
 
-				walkablePlanes.Add(walkablePlane);
+				surfaces.Add(walkablePlane);
 			}
 		}
 
 		private void DestroyWalkablePlanes()
 		{
-			for (int i = 0; i < walkablePlanes.Count; i++)
+			for (int i = 0; i < surfaces.Count; i++)
 			{
-				Destroy(walkablePlanes[i].gameObject);
+				Destroy(surfaces[i].gameObject);
 			}
 
-			walkablePlanes.Clear();
+			surfaces.Clear();
 		}
 
 		public void Setup(int x, int y, int z)
@@ -134,48 +134,48 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			walkableSides.Reset();
+			surfaceRotations.Reset();
 
 			// If a specific surrounding tile wasn't found, it means 
 			// there's walking space on this side of the tile
 			if (leftTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Left);
+				surfaceRotations.Add(SurfaceRotation.Left);
 			}
 
 			if (rightTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Right);
+				surfaceRotations.Add(SurfaceRotation.Right);
 			}
 
 			if (bottomTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Bottom);
+				surfaceRotations.Add(SurfaceRotation.Bottom);
 			}
 
 			if (topTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Top);
+				surfaceRotations.Add(SurfaceRotation.Top);
 			}
 
 			if (frontTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Front);
+				surfaceRotations.Add(SurfaceRotation.Front);
 			}
 
 			if (rearTile == null)
 			{
-				walkableSides.Add(WorldTileWalkableSide.Rear);
+				surfaceRotations.Add(SurfaceRotation.Rear);
 			}
 
 			CreateWalkablePlanes();
 		}
 
-		public WalkablePlane GetRandomWalkablePlane()
+		public WorldTileSurface GetRandomWalkablePlane()
 		{
-			int randomIndex = UnityEngine.Random.Range(0, walkablePlanes.Count);
+			int randomIndex = UnityEngine.Random.Range(0, surfaces.Count);
 
-			return walkablePlanes[randomIndex];
+			return surfaces[randomIndex];
 		}
 	}
 }
