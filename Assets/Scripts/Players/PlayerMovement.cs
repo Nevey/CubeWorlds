@@ -6,8 +6,11 @@ using UnityEngine;
 namespace CCore.CubeWorlds.Players
 {
     [RequireComponent(typeof(Player))]
+	[RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour, IPlayerEnabler
     {
+		[SerializeField] private float movementStrength = 1f;
+
 		private Player player;
 
 		private new Rigidbody rigidbody;
@@ -37,23 +40,17 @@ namespace CCore.CubeWorlds.Players
 
 			Transform cameraTransform = player.CameraSlot.Camera.transform;
 
-            switch (e.playerInputType)
+			if (e.playerInputType == PlayerInputType.Movement)
 			{
-				case PlayerInputType.MoveLeft:
-					cameraDirection = -cameraTransform.right;
-					break;
-				
-				case PlayerInputType.MoveRight:
-					cameraDirection = cameraTransform.right;
-					break;
-				
-				case PlayerInputType.MoveBackward:
-					cameraDirection = -cameraTransform.forward;
-					break;
-				
-				case PlayerInputType.MoveForward:
-					cameraDirection = cameraTransform.forward;
-					break;
+				float horizontalInput = Input.GetAxis("Horizontal");
+
+				float verticalInput = Input.GetAxis("Vertical");
+
+				Vector3 horizontalDirection = cameraTransform.right * horizontalInput;
+
+				Vector3 verticalDirection = cameraTransform.forward * verticalInput;
+
+				cameraDirection = horizontalDirection + verticalDirection;
 			}
         }
 
@@ -72,9 +69,9 @@ namespace CCore.CubeWorlds.Players
 
 			Vector3 normalizedVector = Vector3.Normalize(localCameraDirection);
 
-			// TODO: Add strength multiplier
+			// Vector3 normalizedVector = Vector3.Normalize(cameraDirection);
 
-			return normalizedVector;
+			return normalizedVector *= movementStrength;
 		}
 
         public void OnPlayerEnabled()

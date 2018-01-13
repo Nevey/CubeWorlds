@@ -22,28 +22,23 @@ namespace CCore.CubeWorlds.GameInput
 		}
 
         private void OnKeyboardInput(object sender, KeyboardInputArgs e)
-        {
-            switch (e.keyCode)
+        {				
+			if (e.keyCode == KeyCode.LeftArrow
+				|| e.keyCode == KeyCode.RightArrow
+				|| e.keyCode == KeyCode.UpArrow
+				|| e.keyCode == KeyCode.DownArrow)
 			{
-				case KeyCode.LeftArrow:
-					DispatchPlayerInput(PlayerInputType.MoveLeft, e.inputState);
-					break;
+				DispatchPlayerInput(PlayerInputType.Movement, e.inputState);
+			}
 
-				case KeyCode.RightArrow:
-					DispatchPlayerInput(PlayerInputType.MoveRight, e.inputState);
-					break;
+			if (e.keyCode == KeyCode.Space)
+			{
+				DispatchPlayerInput(PlayerInputType.Jump, e.inputState);
+			}
 
-				case KeyCode.UpArrow:
-					DispatchPlayerInput(PlayerInputType.MoveForward, e.inputState);
-					break;
-
-				case KeyCode.DownArrow:
-					DispatchPlayerInput(PlayerInputType.MoveBackward, e.inputState);
-					break;
-				
-				case KeyCode.T:
-					DispatchPlayerInput(PlayerInputType.DebugSpawn, e.inputState);
-					break;
+			if (e.keyCode == KeyCode.T)
+			{
+				DispatchPlayerInput(PlayerInputType.SpawnCheat, e.inputState);
 			}
         }
 

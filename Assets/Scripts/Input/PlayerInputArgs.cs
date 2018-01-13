@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace CCore.CubeWorlds.GameInput
 {
@@ -11,5 +12,7 @@ namespace CCore.CubeWorlds.GameInput
         /// </summary>
         /// <returns>InputState</returns>
         public InputState inputState { get; set; }
+
+        public Vector3 movementDirection { get; set; }
     }
 }

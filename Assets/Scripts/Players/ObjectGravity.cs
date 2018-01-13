@@ -1,11 +1,12 @@
 using UnityEngine;
 
+// TODO: Move to generic namespace and folder
 namespace CCore.CubeWorlds.Players
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerGravity : MonoBehaviour
+    public class ObjectGravity : MonoBehaviour
     {
-        private float gravity = 0.5f;
+        [SerializeField] private float gravityStrength = 1f;
 
         private new Rigidbody rigidbody;
 
@@ -16,12 +17,12 @@ namespace CCore.CubeWorlds.Players
 
         private void Update()
         {
-            rigidbody.AddRelativeForce(0f, -gravity, 0f, ForceMode.Acceleration);
+            rigidbody.AddRelativeForce(0f, -gravityStrength, 0f, ForceMode.Force);
         }
 
-        public void SetGravityValue(float value)
+        public void OverrideGravityStrength(float strength)
         {
-            gravity = value;
+            gravityStrength = strength;
         }
     }
 }

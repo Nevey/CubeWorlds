@@ -21,7 +21,7 @@ namespace CCore.CubeWorlds.Worlds
 
         private void OnPlayerInputEvent(object sender, PlayerInputArgs e)
         {
-            if (e.playerInputType == PlayerInputType.DebugSpawn
+            if (e.playerInputType == PlayerInputType.SpawnCheat
 				&& e.inputState == InputState.Down)
 			{
 				WorldTile worldTile = world.GetRandomSurfacedWorldTile();
