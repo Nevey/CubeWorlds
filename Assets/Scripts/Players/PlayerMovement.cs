@@ -11,11 +11,15 @@ namespace CCore.CubeWorlds.Players
     {
 		[SerializeField] private float movementStrength = 1f;
 
+		[SerializeField] private float movementSmoothTime = 0.1f;
+
 		private Player player;
 
 		private new Rigidbody rigidbody;
 
 		private Vector3 relativeCameraDirection;
+
+		private Vector3 currentMovementVelocity;
 
 		private void Start()
 		{
@@ -63,7 +67,13 @@ namespace CCore.CubeWorlds.Players
 			// Keep jump/gravity intact
 			targetLocalVelocity.y = currentLocalVelocity.y;
 
-			rigidbody.velocity = transform.localToWorldMatrix.MultiplyVector(targetLocalVelocity);
+			Vector3 targetWorldVelocity = transform.localToWorldMatrix.MultiplyVector(targetLocalVelocity);
+
+			rigidbody.velocity = Vector3.SmoothDamp(
+				rigidbody.velocity,
+				targetWorldVelocity,
+				ref currentMovementVelocity,
+				movementSmoothTime);
 		}
 
 		private Vector3 GetMovementVelocity()

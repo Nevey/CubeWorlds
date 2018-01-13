@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b7ca9c8db060d448fc7223b39f40c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0.5447261, g: 0, b: 0.60294116, a: 1}
   jumpStrength: 5
 --- !u!114 &114667628183552918
@@ -283,9 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff5189ab82fd5b40b94a45c3e8d1a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingEnabled: 1
+  loggingEnabled: 0
   loggingColor: {r: 0, g: 0.4705882, b: 0.41217038, a: 1}
   movementStrength: 10
+  movementSmoothTime: 0.1
 --- !u!136 &136437714267241376
 CapsuleCollider:
   m_ObjectHideFlags: 1
