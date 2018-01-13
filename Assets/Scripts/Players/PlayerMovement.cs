@@ -15,7 +15,7 @@ namespace CCore.CubeWorlds.Players
 
 		private new Rigidbody rigidbody;
 
-		private Vector3 cameraDirection;
+		private Vector3 relativeCameraDirection;
 
 		private void Start()
 		{
@@ -24,7 +24,7 @@ namespace CCore.CubeWorlds.Players
 			rigidbody = GetComponent<Rigidbody>();
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			UpdatePosition();
 		}
@@ -33,7 +33,7 @@ namespace CCore.CubeWorlds.Players
         {
 			if (e.inputState != InputState.Hold)
 			{
-				cameraDirection = Vector3.zero;
+				relativeCameraDirection = Vector3.zero;
 
 				return;
 			}
@@ -50,26 +50,29 @@ namespace CCore.CubeWorlds.Players
 
 				Vector3 verticalDirection = cameraTransform.forward * verticalInput;
 
-				cameraDirection = horizontalDirection + verticalDirection;
+				relativeCameraDirection = horizontalDirection + verticalDirection;
 			}
         }
 
 		private void UpdatePosition()
 		{
-			Vector3 force = GetMovementForce();
+			Vector3 targetLocalVelocity = GetMovementVelocity();
 
-			rigidbody.AddRelativeForce(force, ForceMode.Force);
+			Vector3 currentLocalVelocity = transform.worldToLocalMatrix.MultiplyVector(rigidbody.velocity);
+
+			// Keep jump/gravity intact
+			targetLocalVelocity.y = currentLocalVelocity.y;
+
+			rigidbody.velocity = transform.localToWorldMatrix.MultiplyVector(targetLocalVelocity);
 		}
 
-		private Vector3 GetMovementForce()
+		private Vector3 GetMovementVelocity()
 		{
-			Vector3 localCameraDirection = transform.worldToLocalMatrix.MultiplyVector(cameraDirection);
+			Vector3 localCameraDirection = transform.worldToLocalMatrix.MultiplyVector(relativeCameraDirection);
 
 			localCameraDirection.y = 0f;
 
 			Vector3 normalizedVector = Vector3.Normalize(localCameraDirection);
-
-			// Vector3 normalizedVector = Vector3.Normalize(cameraDirection);
 
 			return normalizedVector *= movementStrength;
 		}
