@@ -37,14 +37,9 @@ namespace CCore.CubeWorlds.Worlds
 
 		public List<WorldTile> FlattenedGrid { get { return flattenedGrid; } }
 
-		private void Start()
-		{
-			// TODO: Add a world controller, making sure only one world is active at a time
-			CreateWorld();
-		}
-
 		private void CreateWorld()
 		{
+			// TODO: In stead of creating world, find and map all tiles, then update grid etc...
 			CreateWorldGrid();
 
 			UpdateWorldGrid();
