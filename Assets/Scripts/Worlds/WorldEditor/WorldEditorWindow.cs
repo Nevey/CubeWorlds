@@ -27,6 +27,8 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
         private void Awake()
         {
+            titleContent = new GUIContent("World Editor");
+
             worldEditorController.ShowWorldEditorScene();
         }
 
