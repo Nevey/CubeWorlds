@@ -4,29 +4,21 @@ using CCore.CubeWorlds.Worlds.WorldTiles;
 
 namespace CCore.CubeWorlds.Worlds
 {
-	[CreateAssetMenu(fileName = "WorldConfig", menuName = "Config/World", order = 1)]
 	public class WorldConfig : ScriptableObject
 	{
-		[Header("World Identification")]
-		[SerializeField] private int id;
+		private int gridSize;
 
-		[SerializeField] private new string name;
+		private WorldTile[,,] grid;
 
-		[Header("World Appearance")]
-		[SerializeField] private int worldSize;
+		public int GridSize { get { return gridSize; } }
 
-		[SerializeField] private WorldTile worldTile;
+		public WorldTile[,,] Grid { get { return grid; } }
 
-		[SerializeField] private float spaceBetweenCubes;
+		public void SetData(int gridSize, WorldTile[,,] grid)
+		{
+			this.gridSize = gridSize;
 
-		public int ID { get { return id; } }
-
-		public string Name { get { return name; } }
-
-		public int WorldSize { get { return worldSize; } }
-
-		public WorldTile WorldTilePrefab { get { return worldTile; } }
-
-		public float SpaceBetweenCubes { get { return spaceBetweenCubes; } }
+			this.grid = grid;
+		}
 	}
 }

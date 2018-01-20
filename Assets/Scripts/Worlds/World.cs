@@ -15,9 +15,9 @@ namespace CCore.CubeWorlds.Worlds
 
 	public class World : MonoBehaviour
 	{
-		[SerializeField] private WorldConfig config;
-
 		[SerializeField] private bool debugWalkableSides;
+		
+		private WorldConfig config;
 
 		/// <summary>
 		/// This is the 3D grid of the world
@@ -37,74 +37,78 @@ namespace CCore.CubeWorlds.Worlds
 
 		public List<WorldTile> FlattenedGrid { get { return flattenedGrid; } }
 
-		private void CreateWorld()
+		private void Start()
 		{
+			config = Resources.Load("BIG PHAT TEST") as WorldConfig;
+
+			Debug.Log(config.GridSize);
+
 			// TODO: In stead of creating world, find and map all tiles, then update grid etc...
-			CreateWorldGrid();
+			// CreateWorldGrid();
 
-			UpdateWorldGrid();
+			// UpdateWorldGrid();
 
-			EnableWorld();
+			// EnableWorld();
 		}
 
-		private void CreateWorldGrid()
-		{
-			grid = new WorldTile[
-				config.WorldSize,
-				config.WorldSize,
-				config.WorldSize
-			];
+		// private void CreateWorldGrid()
+		// {
+		// 	grid = new WorldTile[
+		// 		config.WorldSize,
+		// 		config.WorldSize,
+		// 		config.WorldSize
+		// 	];
 
-			for (int x = 0; x < config.WorldSize; x++)
-			{
-				for (int y = 0; y < config.WorldSize; y++)
-				{
-					for (int z = 0; z < config.WorldSize; z++)
-					{
-						WorldTile worldTile = CreateCube(x, y, z);
+		// 	for (int x = 0; x < config.WorldSize; x++)
+		// 	{
+		// 		for (int y = 0; y < config.WorldSize; y++)
+		// 		{
+		// 			for (int z = 0; z < config.WorldSize; z++)
+		// 			{
+		// 				WorldTile worldTile = CreateCube(x, y, z);
 
-						grid[x, y, z] = worldTile;
+		// 				grid[x, y, z] = worldTile;
 
-						flattenedGrid.Add(worldTile);
-					}
-				}
-			}
-		}
+		// 				flattenedGrid.Add(worldTile);
+		// 			}
+		// 		}
+		// 	}
+		// }
 
-		private WorldTile CreateCube(int x, int y, int z)
-		{
-			WorldTile worldTile = Instantiate(config.WorldTilePrefab);
+		// private WorldTile CreateCube(int x, int y, int z)
+		// {
+		// 	WorldTile worldTile = Instantiate(config.WorldTilePrefab);
 
-			worldTile.Setup(x, y, z);
+		// 	worldTile.Setup(x, y, z);
 
-			float cubeSize = worldTile.GetComponent<Renderer>().bounds.size.x;
+		// 	float cubeSize = worldTile.GetComponent<Renderer>().bounds.size.x;
 
-			float halfGridSize = (cubeSize + config.SpaceBetweenCubes) * config.WorldSize / 2;
+		// 	float halfGridSize = (cubeSize + config.SpaceBetweenCubes) * config.WorldSize / 2;
 
-			float halfCubeSize = (cubeSize + config.SpaceBetweenCubes) / 2;
+		// 	float halfCubeSize = (cubeSize + config.SpaceBetweenCubes) / 2;
 
-			Vector3 position = new Vector3(
-				(cubeSize + config.SpaceBetweenCubes) * x - halfGridSize + halfCubeSize,
-				(cubeSize + config.SpaceBetweenCubes) * y - halfGridSize + halfCubeSize,
-				(cubeSize + config.SpaceBetweenCubes) * z - halfGridSize + halfCubeSize
-			);
+		// 	Vector3 position = new Vector3(
+		// 		(cubeSize + config.SpaceBetweenCubes) * x - halfGridSize + halfCubeSize,
+		// 		(cubeSize + config.SpaceBetweenCubes) * y - halfGridSize + halfCubeSize,
+		// 		(cubeSize + config.SpaceBetweenCubes) * z - halfGridSize + halfCubeSize
+		// 	);
 			
-			worldTile.transform.position = position;
+		// 	worldTile.transform.position = position;
 			
-			worldTile.transform.parent = transform;
+		// 	worldTile.transform.parent = transform;
 			
-			worldTile.name = config.Name + "'s tile[" + x + ", " + y + ", " + z + "]";
+		// 	worldTile.name = config.Name + "'s tile[" + x + ", " + y + ", " + z + "]";
 
-			return worldTile;
-		}
+		// 	return worldTile;
+		// }
 
-		private void UpdateWorldGrid()
-		{
-			for (int i = 0; i < flattenedGrid.Count; i++)
-			{
-				flattenedGrid[i].UpdateWalkableArea(grid, config, debugWalkableSides);
-			}
-		}
+		// private void UpdateWorldGrid()
+		// {
+		// 	for (int i = 0; i < flattenedGrid.Count; i++)
+		// 	{
+		// 		flattenedGrid[i].UpdateWalkableArea(grid, config, debugWalkableSides);
+		// 	}
+		// }
 
 		private void EnableWorld()
 		{

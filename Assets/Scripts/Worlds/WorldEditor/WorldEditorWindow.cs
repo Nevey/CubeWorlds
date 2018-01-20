@@ -17,6 +17,8 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
         private GameObject worldGameObject;
 
+        private bool useCustomPrefabs;
+
         [MenuItem("CCore/World Editor")]
         public static void ShowWindow()
         {
@@ -72,7 +74,11 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
             EditorGUILayout.BeginScrollView(Vector2.zero, GUILayout.Height(500));
 
+            useCustomPrefabs = EditorGUILayout.BeginToggleGroup("Use Custom Prefabs", useCustomPrefabs);
+
             tilePrefab = (WorldTile)EditorGUILayout.ObjectField(tilePrefab, typeof(WorldTile), false);
+
+            EditorGUILayout.EndToggleGroup();
 
             gridSize = EditorGUILayout.IntSlider("World Size", gridSize, 1, WorldEditorConstants.maxGridSize);
 
@@ -96,7 +102,9 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
             if (GUILayout.Button("Save", GUILayout.Width(100), GUILayout.Height(50)))
             {
-                TrySaveWorld();
+                TrySaveWorldConfig();
+
+                TrySaveWorldPrefab();
             }
 
             GUILayout.FlexibleSpace();
@@ -136,35 +144,82 @@ namespace CCore.CubeWorlds.Worlds.Editor
             worldGameObject.AddComponent<WorldBuilder>().CreateWorldGrid(gridSize, tilePrefab, spaceBetweenTiles);
         }
 
-        private void TrySaveWorld()
+        private void TrySaveWorldConfig()
         {
-            string prefabPath = String.Format("Assets/Prefabs/Worlds/{0}.prefab", worldName);
+            string parentFolder = "Assets/Config";
 
-            if (AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject)))
+            string newFolder = "Resources";
+
+            string extension = "asset";
+
+            string assetPath = AssetHelper.GetAssetPath(parentFolder, newFolder, worldName, extension);
+
+            if (AssetHelper.DoesAssetExist<WorldConfig>(assetPath))
             {
-                if (EditorUtility.DisplayDialog(
+                if (!EditorUtility.DisplayDialog(
+                    "Config file already exists!",
+                    "Do you wish to overwrite world config with name: " + worldName + "?",
+                    "Yep!",
+                    "Shit no! Take me back!"))
+                {
+                    return;
+                }
+            }
+
+            AssetHelper.TryCreateFolder(parentFolder, newFolder);
+
+            CreateWorldConfig(assetPath);
+        }
+
+        private void TrySaveWorldPrefab()
+        {
+            string parentFolder = "Assets/Prefabs";
+
+            string newFolder = "Worlds";
+
+            string extension = "prefab";
+
+            string assetPath = AssetHelper.GetAssetPath(parentFolder, newFolder, worldName, extension);
+
+            if (AssetHelper.DoesAssetExist<GameObject>(assetPath))
+            {
+                if (!EditorUtility.DisplayDialog(
                     "Prefab already exists!",
                     "Do you wish to overwrite prefab with name: " + worldName + "?",
                     "Yep!",
                     "Shit no! Take me back!"))
                 {
-                    CreateWorldPrefab(prefabPath);
+                    return;
                 }
             }
-            else
-            {
-                CreateWorldPrefab(prefabPath);
-            }
+
+            AssetHelper.TryCreateFolder(parentFolder, newFolder);
+
+            CreateWorldPrefab(assetPath);
+        }
+
+        private void CreateWorldConfig(string assetPath)
+        {
+            WorldConfig worldConfig = ScriptableObject.CreateInstance<WorldConfig>();
+
+            WorldBuilder worldBuilder = worldGameObject.GetComponent<WorldBuilder>();
+
+			worldConfig.SetData(worldBuilder.GridSize, worldBuilder.Grid);
+
+			AssetDatabase.CreateAsset(worldConfig, assetPath);
+			
+			AssetDatabase.SaveAssets();
         }
 
         private void CreateWorldPrefab(string prefabPath)
         {
-            // TODO: Add components:
-            // - World.cs
-            // - WorldCameraEnabler.cs
-            // - WorldPlayerSpawner.cs
-            
             UnityEngine.Object prefab = PrefabUtility.CreateEmptyPrefab(prefabPath);
+
+            DestroyImmediate(worldGameObject.GetComponent<WorldBuilder>());
+
+            worldGameObject.AddComponent<World>();
+            worldGameObject.AddComponent<WorldCameraEnabler>();
+            worldGameObject.AddComponent<WorldPlayerSpawner>();
 
             PrefabUtility.ReplacePrefab(worldGameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
         }
