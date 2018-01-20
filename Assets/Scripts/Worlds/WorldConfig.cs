@@ -1,32 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using CCore.CubeWorlds.Worlds.WorldTiles;
+using System.Collections.Generic;
 
 namespace CCore.CubeWorlds.Worlds
 {
-	[CreateAssetMenu(fileName = "WorldConfig", menuName = "Config/World", order = 1)]
 	public class WorldConfig : ScriptableObject
 	{
-		[Header("World Identification")]
-		[SerializeField] private int id;
+		[SerializeField] private int gridSize;
 
-		[SerializeField] private new string name;
+		public int GridSize { get { return gridSize; } }
 
-		[Header("World Appearance")]
-		[SerializeField] private int worldSize;
-
-		[SerializeField] private WorldTile worldTile;
-
-		[SerializeField] private float spaceBetweenCubes;
-
-		public int ID { get { return id; } }
-
-		public string Name { get { return name; } }
-
-		public int WorldSize { get { return worldSize; } }
-
-		public WorldTile WorldTilePrefab { get { return worldTile; } }
-
-		public float SpaceBetweenCubes { get { return spaceBetweenCubes; } }
+		public void SetData(int gridSize)
+		{
+			this.gridSize = gridSize;
+		}
 	}
 }

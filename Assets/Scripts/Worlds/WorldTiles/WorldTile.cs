@@ -41,7 +41,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				
 				SurfaceRotation surfaceRotation = surfaceRotations.SurfaceRotationList[i];
 
-				WorldTileSurface walkablePlane = Instantiate(walkablePlanePrefab);
+				WorldTileSurface walkablePlane = Instantiate(GetWorldTileSurfacePrefab());
 
 				walkablePlane.transform.parent = transform;
 
@@ -61,6 +61,15 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			surfaces.Clear();
 		}
 
+		private WorldTileSurface GetWorldTileSurfacePrefab()
+		{
+			GameObject worldTileSurfacePrefab = Resources.Load("WorldTileSurface") as GameObject;
+
+			WorldTileSurface worldTileSurface = worldTileSurfacePrefab.GetComponent<WorldTileSurface>();
+
+			return worldTileSurface;
+		}
+
 		public void Setup(int x, int y, int z)
 		{
 			coordinates.x = x;
@@ -70,7 +79,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 			state = WorldTileState.Alive;
 		}
 
-		public void UpdateWalkableArea(WorldTile[,,] worldTiles, WorldConfig worldConfig, bool debug = false)
+		public void UpdateWalkableArea(WorldTile[,,] worldTiles, int gridSize, bool debug = false)
 		{
 			// First try to find surrounding tiles
 			WorldTile leftTile 		= null;
@@ -89,7 +98,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.right < worldConfig.WorldSize)
+			if (coordinates.right < gridSize)
 			{
 				rightTile = worldTiles[
 					coordinates.right,
@@ -107,7 +116,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.top < worldConfig.WorldSize)
+			if (coordinates.top < gridSize)
 			{
 				topTile = worldTiles[
 					coordinates.x,
@@ -125,7 +134,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 				];
 			}
 
-			if (coordinates.rear < worldConfig.WorldSize)
+			if (coordinates.rear < gridSize)
 			{
 				rearTile = worldTiles[
 					coordinates.x,

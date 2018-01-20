@@ -9,13 +9,17 @@ namespace CCore.CubeWorlds.Worlds
 	[RequireComponent(typeof(World))]
 	public class WorldPlayerSpawner : MonoBehaviour, IWorldEnabler
 	{
-		[SerializeField] private Player playerPrefab;
+		private Player playerPrefab;
 
 		private World world;
 
 		private void Start()
 		{
 			world = GetComponent<World>();
+
+			GameObject prefab = Resources.Load("Player") as GameObject;
+
+			playerPrefab = prefab.GetComponent<Player>();
 		}
 
         private void OnPlayerInputEvent(object sender, PlayerInputArgs e)

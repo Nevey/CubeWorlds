@@ -10,7 +10,8 @@ namespace CCore.CubeWorlds.Worlds
 
         public void OnWorldEnable()
         {
-            CameraController.Instance.SetCameraSlot(cameraSlot, transform);
+            // TODO: Add a camera slot to the world when creating it
+            // CameraController.Instance.SetCameraSlot(cameraSlot, transform);
         }
 
         public void OnWorldDisable()
