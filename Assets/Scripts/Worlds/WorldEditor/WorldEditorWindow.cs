@@ -105,12 +105,18 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
             GUILayout.FlexibleSpace();
 
+            bool saveDisabled = worldEditorController.WorldGameObject == null;
+
+            EditorGUI.BeginDisabledGroup(saveDisabled);
+
             if (GUILayout.Button("Save", GUILayout.Width(100), GUILayout.Height(50)))
             {
                 worldEditorController.TrySaveWorldConfig(worldName);
 
                 worldEditorController.TrySaveWorldPrefab(worldName);
             }
+
+            EditorGUI.EndDisabledGroup();
 
             GUILayout.FlexibleSpace();
 
