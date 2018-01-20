@@ -1,4 +1,5 @@
 using CCore.CubeWorlds.Worlds.WorldTiles;
+using CCore.Scenes;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace CCore.CubeWorlds.Worlds.Editor
     [ExecuteInEditMode]
     public class WorldEditorController
     {
+        private const string worldEditorSceneName = "WorldEditor";
+
         private GameObject worldGameObject;
 
         private void CreateWorld(string worldName, int gridSize, WorldTile tilePrefab, float spaceBetweenTiles)
@@ -49,8 +52,17 @@ namespace CCore.CubeWorlds.Worlds.Editor
             PrefabUtility.ReplacePrefab(worldGameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
         }
 
+        private void CloseOtherScenes()
+        {
+            SceneController.CloseAllScenesInEditor();
+
+            SceneController.OpenWorldEditorScene();
+        }
+
         public void TryCreateWorld(string worldName, int gridSize, WorldTile tilePrefab, float spaceBetweenTiles)
         {
+            CloseOtherScenes();
+
             if (worldGameObject != null)
             {
                 if (!EditorUtility.DisplayDialog(
