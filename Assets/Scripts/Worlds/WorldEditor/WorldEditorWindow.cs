@@ -25,6 +25,11 @@ namespace CCore.CubeWorlds.Worlds.Editor
             EditorWindow.GetWindow(typeof(WorldEditorWindow));
         }
 
+        private void Awake()
+        {
+            worldEditorController.ShowWorldEditorScene();
+        }
+
         private void OnGUI()
         {
             minSize = new Vector2(300, 200);

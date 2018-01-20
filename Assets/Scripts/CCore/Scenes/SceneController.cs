@@ -31,11 +31,12 @@ namespace CCore.Scenes
         /// </summary>
         /// <param name="name"></param>
         /// <param name="removeScene"></param>
-        public static void CloseSceneInEditor(string name, bool removeScene = true)
+        /// <returns>Scene</returns>
+        public static bool CloseSceneInEditor(string name, bool removeScene = true)
         {
             Scene scene = EditorSceneManager.GetSceneByName(name);
 
-            EditorSceneManager.CloseScene(scene, removeScene);
+            return EditorSceneManager.CloseScene(scene, removeScene);
         }
 
         public static void OpenWorldEditorScene()

@@ -5,12 +5,11 @@ using UnityEngine;
 
 namespace CCore.CubeWorlds.Worlds.Editor
 {
-    [ExecuteInEditMode]
     public class WorldEditorController
     {
-        private const string worldEditorSceneName = "WorldEditor";
-
         private GameObject worldGameObject;
+
+        public GameObject WorldGameObject { get { return worldGameObject; } }
 
         private void CreateWorld(string worldName, int gridSize, WorldTile tilePrefab, float spaceBetweenTiles)
         {
@@ -52,16 +51,9 @@ namespace CCore.CubeWorlds.Worlds.Editor
             PrefabUtility.ReplacePrefab(worldGameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
         }
 
-        private void CloseOtherScenes()
-        {
-            SceneController.CloseAllScenesInEditor();
-
-            SceneController.OpenWorldEditorScene();
-        }
-
         public void TryCreateWorld(string worldName, int gridSize, WorldTile tilePrefab, float spaceBetweenTiles)
         {
-            CloseOtherScenes();
+            ShowWorldEditorScene();
 
             if (worldGameObject != null)
             {
@@ -130,6 +122,13 @@ namespace CCore.CubeWorlds.Worlds.Editor
             AssetHelper.TryCreateFolder(parentFolder, newFolder);
 
             CreateWorldPrefab(assetPath);
+        }
+
+        public void ShowWorldEditorScene()
+        {
+            SceneController.CloseAllScenesInEditor();
+
+            SceneController.OpenWorldEditorScene();
         }
     }
 }
