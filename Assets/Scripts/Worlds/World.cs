@@ -1,8 +1,9 @@
-﻿using CCore;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CCore;
 using CCore.CubeWorlds.Worlds.WorldTiles;
+using System;
 
 namespace CCore.CubeWorlds.Worlds
 {
@@ -29,7 +30,7 @@ namespace CCore.CubeWorlds.Worlds
 		/// </summary>
 		private List<WorldTile> flattenedGrid = new List<WorldTile>();
 
-		private IWorldEnabler[] iWorldEnablers;
+		private IWorldEnabler[] worldEnablers;
 
 		public WorldConfig Config { get { return config; } }
 
@@ -39,92 +40,69 @@ namespace CCore.CubeWorlds.Worlds
 
 		private void Start()
 		{
-			config = Resources.Load("BIG PHAT TEST") as WorldConfig;
+			config = Resources.Load(name) as WorldConfig;
 
-			Debug.Log(config.GridSize);
+			MapWorldTiles();
 
-			// TODO: In stead of creating world, find and map all tiles, then update grid etc...
-			// CreateWorldGrid();
+			UpdateWorldGrid();
 
-			// UpdateWorldGrid();
-
-			// EnableWorld();
+			EnableWorld();
 		}
 
-		// private void CreateWorldGrid()
-		// {
-		// 	grid = new WorldTile[
-		// 		config.WorldSize,
-		// 		config.WorldSize,
-		// 		config.WorldSize
-		// 	];
+		private void MapWorldTiles()
+		{
+			grid = new WorldTile[config.GridSize, config.GridSize, config.GridSize];
 
-		// 	for (int x = 0; x < config.WorldSize; x++)
-		// 	{
-		// 		for (int y = 0; y < config.WorldSize; y++)
-		// 		{
-		// 			for (int z = 0; z < config.WorldSize; z++)
-		// 			{
-		// 				WorldTile worldTile = CreateCube(x, y, z);
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				WorldTile worldTile = transform.GetChild(i).GetComponent<WorldTile>();
 
-		// 				grid[x, y, z] = worldTile;
+				if (worldTile == null)
+				{
+					continue;
+				}
 
-		// 				flattenedGrid.Add(worldTile);
-		// 			}
-		// 		}
-		// 	}
-		// }
+				// NOTE: Very dependant on world tile's name!!!
+				// TODO: Find a safer way of doing this...
+				string[] string1 = worldTile.name.Split('[');
+				string[] string2 = string1[1].Split(']');
+				string[] string3 = string2[0].Split(',');
 
-		// private WorldTile CreateCube(int x, int y, int z)
-		// {
-		// 	WorldTile worldTile = Instantiate(config.WorldTilePrefab);
+				int x = Convert.ToInt16(string3[0]);
+				int y = Convert.ToInt16(string3[1]);
+				int z = Convert.ToInt16(string3[2]);
 
-		// 	worldTile.Setup(x, y, z);
+				worldTile.Setup(x, y, z);
 
-		// 	float cubeSize = worldTile.GetComponent<Renderer>().bounds.size.x;
+				grid[x, y, z] = worldTile;
 
-		// 	float halfGridSize = (cubeSize + config.SpaceBetweenCubes) * config.WorldSize / 2;
+				flattenedGrid.Add(worldTile);
+			}
+		}
 
-		// 	float halfCubeSize = (cubeSize + config.SpaceBetweenCubes) / 2;
-
-		// 	Vector3 position = new Vector3(
-		// 		(cubeSize + config.SpaceBetweenCubes) * x - halfGridSize + halfCubeSize,
-		// 		(cubeSize + config.SpaceBetweenCubes) * y - halfGridSize + halfCubeSize,
-		// 		(cubeSize + config.SpaceBetweenCubes) * z - halfGridSize + halfCubeSize
-		// 	);
-			
-		// 	worldTile.transform.position = position;
-			
-		// 	worldTile.transform.parent = transform;
-			
-		// 	worldTile.name = config.Name + "'s tile[" + x + ", " + y + ", " + z + "]";
-
-		// 	return worldTile;
-		// }
-
-		// private void UpdateWorldGrid()
-		// {
-		// 	for (int i = 0; i < flattenedGrid.Count; i++)
-		// 	{
-		// 		flattenedGrid[i].UpdateWalkableArea(grid, config, debugWalkableSides);
-		// 	}
-		// }
+		private void UpdateWorldGrid()
+		{
+			for (int i = 0; i < flattenedGrid.Count; i++)
+			{
+				flattenedGrid[i].UpdateWalkableArea(grid, config.GridSize, debugWalkableSides);
+			}
+		}
 
 		private void EnableWorld()
 		{
-			iWorldEnablers = GetComponentsInChildren<IWorldEnabler>();
+			worldEnablers = GetComponentsInChildren<IWorldEnabler>();
 
-			for (int i = 0; i < iWorldEnablers.Length; i++)
+			for (int i = 0; i < worldEnablers.Length; i++)
 			{
-				iWorldEnablers[i].OnWorldEnable();
+				worldEnablers[i].OnWorldEnable();
 			}
 		}
 
 		private void DisableWorld()
 		{
-			for (int i = 0; i < iWorldEnablers.Length; i++)
+			for (int i = 0; i < worldEnablers.Length; i++)
 			{
-				iWorldEnablers[i].OnWorldDisable();
+				worldEnablers[i].OnWorldDisable();
 			}
 		}
 
@@ -147,7 +125,7 @@ namespace CCore.CubeWorlds.Worlds
 
 		public WorldTile GetRandomWorldTile()
 		{
-			int randomIndex = Random.Range(0, flattenedGrid.Count);
+			int randomIndex = UnityEngine.Random.Range(0, flattenedGrid.Count);
 
 			return flattenedGrid[randomIndex];
 		}
@@ -156,7 +134,7 @@ namespace CCore.CubeWorlds.Worlds
 		{
 			List<WorldTile> surfacedWorldTiles = GetSurfacedWorldTiles();
 
-			int randomIndex = Random.Range(0, surfacedWorldTiles.Count);
+			int randomIndex = UnityEngine.Random.Range(0, surfacedWorldTiles.Count);
 
 			return surfacedWorldTiles[randomIndex];
 		}

@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec49319876ab08c4c95d2b2f02c13ce4, type: 3}
   m_Name: awesome
   m_EditorClassIdentifier: 
+  gridSize: 4

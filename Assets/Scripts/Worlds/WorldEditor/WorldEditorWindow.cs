@@ -204,7 +204,7 @@ namespace CCore.CubeWorlds.Worlds.Editor
 
             WorldBuilder worldBuilder = worldGameObject.GetComponent<WorldBuilder>();
 
-			worldConfig.SetData(worldBuilder.GridSize, worldBuilder.Grid);
+			worldConfig.SetData(worldBuilder.GridSize);
 
 			AssetDatabase.CreateAsset(worldConfig, assetPath);
 			

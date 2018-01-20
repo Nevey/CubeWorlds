@@ -63,7 +63,7 @@ namespace CCore.CubeWorlds.Worlds.WorldTiles
 
 		private WorldTileSurface GetWorldTileSurfacePrefab()
 		{
-			GameObject worldTileSurfacePrefab = Resources.Load("Assets/Prefabs/WorldTiles/WorldTileSurface") as GameObject;
+			GameObject worldTileSurfacePrefab = Resources.Load("WorldTileSurface") as GameObject;
 
 			WorldTileSurface worldTileSurface = worldTileSurfacePrefab.GetComponent<WorldTileSurface>();
 

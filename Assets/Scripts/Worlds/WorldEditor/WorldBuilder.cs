@@ -10,17 +10,11 @@ namespace CCore.CubeWorlds.Worlds.Editor
     {
 		private int gridSize;
 
-		private WorldTile[,,] grid;
-
 		public int GridSize { get { return gridSize; } }
-
-		public WorldTile[,,] Grid { get { return grid; } }
 
         public void CreateWorldGrid(int gridSize, WorldTile tilePrefab, float spaceBetweenTiles)
 		{
 			this.gridSize = gridSize;
-
-			grid = new WorldTile[gridSize, gridSize, gridSize];
 
 			for (int x = 0; x < gridSize; x++)
 			{
@@ -33,8 +27,6 @@ namespace CCore.CubeWorlds.Worlds.Editor
 							tilePrefab,
 							spaceBetweenTiles,
 							x, y, z);
-						
-						grid[x, y, z] = worldTile;
 					}
 				}
 			}
@@ -56,8 +48,6 @@ namespace CCore.CubeWorlds.Worlds.Editor
 			{
 				worldTile = GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<WorldTile>();
 			}
-
-			worldTile.Setup(x, y, z);
 
 			float cubeSize = worldTile.GetComponent<Renderer>().bounds.size.x;
 
